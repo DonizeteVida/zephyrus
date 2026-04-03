@@ -1,0 +1,59 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		}
+	],
+	"settings": {
+		// Hush CMake
+		"cmake.configureOnOpen": false,
+		// IntelliSense
+		"C_Cpp.default.compilerPath": "/usr/bin/gcc",
+		"C_Cpp.default.compileCommands": "${workspaceFolder}/build/compile_commands.json",
+		// File Associations
+		"files.associations": {},
+	},
+	"tasks": {
+		"version": "2.0.0",
+		"tasks": [
+			{
+				"label": "Build",
+				"command": "${userHome}/zephyrproject/.venv/bin/west",
+				"args": [
+					"build",
+					"-b", "native_sim/native/64",
+					"-d", "build",
+					"-p", "auto",
+				]
+			}
+		]
+	},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"preLaunchTask": "Build",
+				"name": "Launch",
+
+				"request": "launch",
+				"type": "cppdbg",
+				
+				"miDebuggerPath": "/usr/bin/gdb",
+				"MIMode": "gdb",
+
+				"cwd": "${workspaceFolder}",
+				"program": "${workspaceFolder}/build/zephyr/zephyr.exe",
+			}
+		]
+	},
+	"extensions": {
+		"recommendations": [
+			"ms-vscode.cpptools-extension-pack",
+			"ms-python.python",
+			"ms-vscode.vscode-embedded-tools",
+			"ms-vscode.vscode-serial-monitor",
+			"marus25.cortex-debug",
+			"donjayamanne.python-environment-manager",
+		]
+	}
+}
