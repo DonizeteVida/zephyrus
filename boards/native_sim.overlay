@@ -3,23 +3,12 @@
     width = <480>;
 };
 
-/delete-node/ &storage_partition;
-
-&flash0 {
-	partitions {
-		compatible = "fixed-partitions";
-		#address-cells = <1>;
-		#size-cells = <1>;
-
-		storage_partition: partition@f0000 {
-			label = "storage";
-			reg = <0x000f0000 DT_SIZE_K(64)>;
-		};
-	};
+&storage_partition {
+	reg = <0x000fc000 DT_SIZE_M(1)>;
 };
 
 / {
-	msc_disk0 {
+	disk0 {
 		status = "okay";
 		compatible = "zephyr,flash-disk";
 		partition = <&storage_partition>;
