@@ -14,8 +14,9 @@ static FATFS fat_fs;
 static struct fs_mount_t fs = {
 	.type = FS_FATFS,
 	.fs_data = &fat_fs,
-	.mnt_point = "/RAM:",
-	.storage_dev = "RAM"};
+	.mnt_point = "/SD:",
+	.storage_dev = "SD",
+};
 
 static void button_clicked_cb(lv_event_t *event)
 {
@@ -35,7 +36,7 @@ static void write_file()
 	struct fs_file_t file;
 	fs_file_t_init(&file);
 
-	ret = fs_open(&file, "/RAM:/hello.txt", FS_O_CREATE | FS_O_WRITE);
+	ret = fs_open(&file, "/SD:/hello.txt", FS_O_CREATE | FS_O_WRITE);
 	if (ret < 0)
 	{
 		printk("Open failed: %d\n", ret);
@@ -48,8 +49,6 @@ static void write_file()
 		printk("Write failed: %d\n", ret);
 	}
 	fs_close(&file);
-
-	fs_unmount(&fs);
 }
 
 int main(void)
